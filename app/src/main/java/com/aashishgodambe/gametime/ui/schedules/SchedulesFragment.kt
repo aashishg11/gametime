@@ -38,19 +38,6 @@ class SchedulesFragment : Fragment(), SchedulesAdapter.ClickListener {
     private lateinit var schedulesAdapter: SchedulesAdapter
     private lateinit var dialogBuilder: AlertDialog.Builder
 
-    private val viewModel: SchedulesViewmodel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        ViewModelProvider(this, SchedulesViewmodel.Factory(activity.application))
-            .get(SchedulesViewmodel::class.java)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        dialogBuilder = AlertDialog.Builder(context)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,11 +52,18 @@ class SchedulesFragment : Fragment(), SchedulesAdapter.ClickListener {
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.setLifecycleOwner(viewLifecycleOwner)
 
+        val team= SchedulesFragmentArgs.fromBundle(requireArguments()).team
+
+        val viewModel: SchedulesViewmodel by lazy {
+            val activity = requireNotNull(this.activity) {
+                "You can only access the viewModel after onActivityCreated()"
+            }
+            ViewModelProvider(this, SchedulesViewmodel.Factory(activity.application,team.idTeam))
+                .get(SchedulesViewmodel::class.java)
+        }
+
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
-
-        val team= SchedulesFragmentArgs.fromBundle(requireArguments()).team
-        viewModel.getTeam(team.idTeam)
 
         schedulesAdapter = SchedulesAdapter(this)
 
@@ -107,6 +101,11 @@ class SchedulesFragment : Fragment(), SchedulesAdapter.ClickListener {
         })
 
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        dialogBuilder = AlertDialog.Builder(context)
     }
 
     override fun onOpenLink(link: String) {

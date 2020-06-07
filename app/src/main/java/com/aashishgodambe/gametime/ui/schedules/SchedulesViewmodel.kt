@@ -16,7 +16,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class SchedulesViewmodel(application: Application) : AndroidViewModel(application) {
+class SchedulesViewmodel(application: Application,team: String) : AndroidViewModel(application) {
 
 
     private val database = getDatabase(application)
@@ -34,6 +34,10 @@ class SchedulesViewmodel(application: Application) : AndroidViewModel(applicatio
 
     // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+    init {
+        getTeam(team)
+    }
 
     fun getTeam(team: String) {
         coroutineScope.launch {
@@ -61,11 +65,11 @@ class SchedulesViewmodel(application: Application) : AndroidViewModel(applicatio
 
         }
     }
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(val app: Application,val team: String) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(SchedulesViewmodel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return SchedulesViewmodel(app) as T
+                return SchedulesViewmodel(app,team) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
