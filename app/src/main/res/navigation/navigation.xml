@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/searchTeamFragment">
+
+    <fragment
+        android:id="@+id/searchTeamFragment"
+        android:name="com.aashishgodambe.gametime.ui.teamSearch.SearchTeamFragment"
+        android:label="Gametime">
+        <action
+            android:id="@+id/action_searchTeamFragment_to_schedulesFragment"
+            app:destination="@id/schedulesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/schedulesFragment"
+        android:name="com.aashishgodambe.gametime.ui.schedules.SchedulesFragment"
+        android:label="Schedules">
+        <argument
+            android:name="team"
+            app:argType="com.aashishgodambe.gametime.models.Team" />
+    </fragment>
+    <fragment
+        android:id="@+id/favouriteFragment"
+        android:name="com.aashishgodambe.gametime.ui.FavouriteFragment"
+        android:label="Favourite Teams">
+        <action
+            android:id="@+id/action_favouriteFragment_to_schedulesFragment"
+            app:destination="@id/schedulesFragment" />
+    </fragment>
+</navigation>

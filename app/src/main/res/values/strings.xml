@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Gametime</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_info_msg">Fetching team history</string>
+    <string name="connection_error">Connection error. Please check internet connectivity.</string>
+    <string name="team_not_found">Team not found. Please search with a different name.</string>
+    <string name="query_hint">Search your favourite team</string>
+    <string name="yes">Yes</string>
+    <string name="later">Not now</string>
+    <string name="add_fav">Add Favourite</string>
+    <string name="pay_success_msg">Enjoy your new feature.</string>
+    <string name="paid_msg">\"Add 10 more favourite teams for $1.99 ?\"</string>
+    <string name="remove_team">Remove team</string>
+    <string name="team_exists">is already a favourite.</string>
+    <string name="match_details">Match details</string>
+    <string name="match_paid_msg">See game details for all of your schedules for $1.99 ? This includes who scored goals, red cards, yellow cards and much more.</string>
+</resources>
