@@ -26,14 +26,9 @@ import kotlinx.android.synthetic.main.loading_dialog.view.*
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AlertDialog
+import com.aashishgodambe.gametime.BaseFragment
 
-
-/**
- * A simple [Fragment] subclass.
- */
-class SchedulesFragment : Fragment(), SchedulesAdapter.ClickListener {
-
-
+class SchedulesFragment : BaseFragment(), SchedulesAdapter.ClickListener {
 
     private lateinit var schedulesAdapter: SchedulesAdapter
     private lateinit var dialogBuilder: AlertDialog.Builder
@@ -99,7 +94,6 @@ class SchedulesFragment : Fragment(), SchedulesAdapter.ClickListener {
                 }
             }
         })
-
         return binding.root
     }
 

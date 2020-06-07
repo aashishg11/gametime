@@ -23,14 +23,18 @@ import com.aashishgodambe.gametime.R
 import com.aashishgodambe.gametime.adapters.TeamsAdapter
 import com.aashishgodambe.gametime.databinding.FragmentSearchTeamBinding
 import com.aashishgodambe.gametime.models.Team
+import android.util.DisplayMetrics
+import com.aashishgodambe.gametime.BaseFragment
+
 
 /**
  * A simple [Fragment] subclass.
  */
-class SearchTeamFragment : Fragment(),TeamsAdapter.ClickListener {
+class SearchTeamFragment : BaseFragment(),TeamsAdapter.ClickListener {
 
     private lateinit var teamAdapter: TeamsAdapter
     private lateinit var dialogBuilder: AlertDialog.Builder
+    private lateinit var searchView: SearchView
     private var searchQuery = ""
     private var count = 0
 
@@ -75,11 +79,11 @@ class SearchTeamFragment : Fragment(),TeamsAdapter.ClickListener {
 
         val rv = binding.root.findViewById<RecyclerView>(R.id.teams_grid)
         rv.apply {
-            layoutManager = GridLayoutManager(context,2)
+            layoutManager = GridLayoutManager(context,getCardCountRow())
             adapter = teamAdapter
         }
 
-        val searchView = binding.root.findViewById<SearchView>(R.id.searchView)
+        searchView = binding.root.findViewById(R.id.searchView)
         searchView.apply {
             queryHint = context.getString(R.string.query_hint)
             isActivated = true
@@ -133,7 +137,6 @@ class SearchTeamFragment : Fragment(),TeamsAdapter.ClickListener {
                 }
             }
         })
-
         setHasOptionsMenu(true)
         return binding.root
     }
@@ -143,6 +146,7 @@ class SearchTeamFragment : Fragment(),TeamsAdapter.ClickListener {
         if (searchQuery.isNotEmpty()){
             viewModel.getTeam(searchQuery)
         }
+        searchView.clearFocus()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -164,11 +168,6 @@ class SearchTeamFragment : Fragment(),TeamsAdapter.ClickListener {
     override fun onPause() {
         super.onPause()
         hideKeyboard()
-    }
-
-    private fun hideKeyboard() {
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
     override fun onAddRemoveFavClick(team: Team) {

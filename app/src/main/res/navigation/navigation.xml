@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/favouriteFragment"
-        android:name="com.aashishgodambe.gametime.ui.FavouriteFragment"
+        android:name="com.aashishgodambe.gametime.ui.favorite.FavouriteFragment"
         android:label="Favourite Teams">
         <action
             android:id="@+id/action_favouriteFragment_to_schedulesFragment"

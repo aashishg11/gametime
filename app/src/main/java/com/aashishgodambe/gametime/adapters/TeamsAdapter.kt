@@ -25,7 +25,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aashishgodambe.gametime.R
 import com.aashishgodambe.gametime.models.Team
-import com.aashishgodambe.gametime.ui.FavouriteFragment
+import com.aashishgodambe.gametime.ui.favorite.FavouriteFragment
 import com.aashishgodambe.gametime.ui.teamSearch.SearchTeamFragment
 import com.squareup.picasso.Picasso
 

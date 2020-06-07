@@ -1,4 +1,4 @@
-package com.aashishgodambe.gametime.ui
+package com.aashishgodambe.gametime.ui.favorite
 
 
 import android.content.Context
@@ -10,8 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -19,21 +17,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aashishgodambe.gametime.BaseFragment
 import com.aashishgodambe.gametime.R
 import com.aashishgodambe.gametime.adapters.TeamsAdapter
 import com.aashishgodambe.gametime.databinding.FragmentFavouriteBinding
-import com.aashishgodambe.gametime.databinding.FragmentSearchTeamBinding
 import com.aashishgodambe.gametime.models.Team
-import com.aashishgodambe.gametime.ui.schedules.SchedulesFragmentArgs
-import com.aashishgodambe.gametime.ui.schedules.SchedulesViewmodel
-import com.aashishgodambe.gametime.ui.teamSearch.SearchTeamFragmentDirections
 import com.aashishgodambe.gametime.ui.teamSearch.SportsApiStatus
 import com.aashishgodambe.gametime.ui.teamSearch.TeamsViewmodel
 
 /**
  * A simple [Fragment] subclass.
  */
-class FavouriteFragment : Fragment(),TeamsAdapter.ClickListener {
+class FavouriteFragment : BaseFragment(),TeamsAdapter.ClickListener {
 
     private lateinit var teamAdapter: TeamsAdapter
     private lateinit var dialogBuilder: AlertDialog.Builder
@@ -70,10 +65,12 @@ class FavouriteFragment : Fragment(),TeamsAdapter.ClickListener {
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
 
-        teamAdapter = TeamsAdapter(this, favViewIdentifier)
+        teamAdapter = TeamsAdapter(this,
+            favViewIdentifier
+        )
 
         binding.root.findViewById<RecyclerView>(R.id.fav_team_grid).apply {
-            layoutManager = GridLayoutManager(context,2)
+            layoutManager = GridLayoutManager(context,getCardCountRow())
             adapter = teamAdapter
         }
 
@@ -105,7 +102,10 @@ class FavouriteFragment : Fragment(),TeamsAdapter.ClickListener {
     }
 
     override fun onTeamClick(team: Team) {
-        this.findNavController().navigate(FavouriteFragmentDirections.actionFavouriteFragmentToSchedulesFragment(team)
+        this.findNavController().navigate(
+            FavouriteFragmentDirections.actionFavouriteFragmentToSchedulesFragment(
+                team
+            )
         )
     }
 
