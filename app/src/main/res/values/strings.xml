@@ -10,7 +10,7 @@
     <string name="later">Not now</string>
     <string name="add_fav">Add Favourite</string>
     <string name="pay_success_msg">Enjoy your new feature.</string>
-    <string name="paid_msg">\"Add 10 more favourite teams for $1.99 ?\"</string>
+    <string name="paid_msg">Add 10 more favourite teams for $1.99 ?</string>
     <string name="remove_team">Remove team</string>
     <string name="team_exists">is already a favourite.</string>
     <string name="match_details">Match details</string>
