@@ -75,10 +75,9 @@ class FavouriteFragment : BaseFragment(),TeamsAdapter.ClickListener {
         }
 
         viewModel.favTeams.observe(viewLifecycleOwner, Observer {
-            if ( it.isNotEmpty()) {
-                Log.d(favViewIdentifier, "Fav list size is ${it.size}")
-                teamAdapter.data = it
-            }
+
+            Log.d(favViewIdentifier, "Fav list size is ${it.size}")
+            teamAdapter.data = it
         })
 
         val statusImageView = binding.root.findViewById<ImageView>(R.id.status_image)
